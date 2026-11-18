@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h1>Encuentra tu clase</h1>
+<p>Responde las {{ preguntas|length }} preguntas y te recomendaremos la clase de Baldur's Gate 3 que mejor se adapta a tu forma de jugar. No necesitas saber de D&amp;D.</p>
+
+{% if error %}
+<div class="error" role="alert">{{ error }}</div>
+{% endif %}
+
+<form method="post" action="/resultado">
+  {% for p in preguntas %}
+  <fieldset>
+    <legend>{{ p.id }}. {{ p.texto }}</legend>
+    {% for o in p.opciones %}
+    <label>
+      <input type="radio" name="p{{ p.id }}" value="{{ loop.index0 }}"
+        {% if previas.get('p' ~ p.id) == (loop.index0|string) %}checked{% endif %}>
+      {{ o.texto }}
+    </label>
+    {% endfor %}
+  </fieldset>
+  {% endfor %}
+  <button type="submit">Ver mi clase</button>
+</form>
+{% endblock %}

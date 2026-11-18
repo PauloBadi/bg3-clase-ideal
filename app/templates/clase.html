@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block titulo %}{{ clase.nombre }}{% endblock %}
+{% block contenido %}
+<h1>{{ clase.nombre }}</h1>
+<p>{{ clase.descripcion }}</p>
+<table>
+  <tr><th>Rol</th><td>{{ clase.rol }}</td></tr>
+  <tr><th>Dificultad</th><td>{{ clase.dificultad_texto }}</td></tr>
+  <tr><th>Dado de golpe</th><td>d{{ clase.dado_golpe }}</td></tr>
+  <tr><th>Armadura</th><td>{{ clase.armadura }}</td></tr>
+</table>
+<h2>Consejo para empezar</h2>
+<p>{{ clase.consejo }}</p>
+<p><a href="/clases">Volver a la lista</a></p>
+{% endblock %}

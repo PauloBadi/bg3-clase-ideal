@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block titulo %}Tu clase: {{ r.principal.clase.nombre }}{% endblock %}
+{% block contenido %}
+{% set c = r.principal.clase %}
+<h1>Tu clase ideal: {{ c.nombre }}</h1>
+<p class="destacado">Compatibilidad: <strong>{{ r.principal.compatibilidad }}%</strong> &middot; Dificultad: <strong>{{ c.dificultad_texto }}</strong></p>
+<p>{{ c.descripcion }}</p>
+
+<table>
+  <tr><th>Rol</th><td>{{ c.rol }}</td></tr>
+  <tr><th>Dado de golpe</th><td>d{{ c.dado_golpe }}</td></tr>
+  <tr><th>Armadura</th><td>{{ c.armadura }}</td></tr>
+</table>
+
+<h2>Consejo para empezar</h2>
+<p>{{ c.consejo }}</p>
+
+<h2>Habilidades sugeridas</h2>
+<p>Reparto de {{ r.puntos_usados }} puntos para la creación del personaje (en el juego se suman las bonificaciones de trasfondo).</p>
+<table>
+  <tr><th>Habilidad</th><th>Valor</th></tr>
+  {% for nombre, valor in r.habilidades %}
+  <tr><td>{{ nombre }}</td><td>{{ valor }}</td></tr>
+  {% endfor %}
+</table>
+
+<h2>Otras clases que podrían gustarte</h2>
+<ul>
+  {% for a in r.alternativas %}
+  <li><a href="/clases/{{ a.clase.slug }}">{{ a.clase.nombre }}</a> &mdash; {{ a.compatibilidad }}% de compatibilidad</li>
+  {% endfor %}
+</ul>
+
+<p><a class="boton" href="/">Repetir el cuestionario</a></p>
+{% endblock %}
